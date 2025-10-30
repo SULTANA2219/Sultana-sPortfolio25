@@ -2,51 +2,184 @@
 <html lang="en">
     <head>
         <title>Sultana's Portfolio </title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:@wght700& display=swap">
         <style>
+        :root {
+            --crsl-bg: transparent;
+            --box-bg: #1e272e;
+            --box-shadow: #0000001c;
+            --box-shadow-border: #0000000f;
+            --box-border: #fff;
+        }
             body {
-                font-family: Times New Roman, Arial;
+                font-family: Times New Roman, Arial, Sans-Serif;
                 background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIZy5nyVZoLNQ-cWojtnTwrwjIk6KlAuqZjSwfLjTrzscWDoh2sPW-Ctc&s=10.jpg');
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
                 margin: 20px;
-                
             }
             .container{
-                backdrop-filter: blur(2px);
                 padding: 20px;
+                justify-content: center;
+                margin-top: 50%;
+                position: relative;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            html > .container, body > .container {
+                padding-top: 125px;
+            }
+            .container-body {
+                width: 100%;
+                padding: 20px 0 50px 0;
+                overflow: hidden;
+            }
+            .container-body .slider-container {
+                position: relative;
+                transition: transform 1s ease-in-out;
+                background: var(--crsl-bg);
+            }
+            .container-body .slide-container {
+                position: relative;
+                display: block;
+                float: left;
+                box-sizing: border-box;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            .container-body .slide-container .3d-frame {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transition: transform 1s ease-in-out;
+                -webkit-transform-style: preserve-3d;
+                transform-style: preserve-3d;
+            }
+            .container-body .slide-container .3d-frame:after {
+                content: '';
+                position: absolute;
+                bottom: -15%;
+                width: 100%;
+                height: 40px;
+                background: var(--box-shadow);
+                box-shadow: 0px 0px 5px 5px var(--box-shadow);
+                transform: rotateX(90deg) translate3d(0px, -20px, 0px);
+                opacity: 0.85;
+            }
+            .container-body .slide-container .3d-frame-box {
+                display: flex;
+                align-items: center;
+                vertical-align: middle;
+                text-align: center;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                border-color: var(--box-border);
+                background: var(--box-bg);
+                border-width: 3px;
+                border-style: solid;
+            }
+            .container-body .slide-container .3d-frame-box--right .3d-frame-box--left {
+                top: 0;
+                width: 40px;
+                backface-visibility: hidden;
+            }
+            .container-body .slide-container .3d-frame-box--left {
+                left: 0;
+                border-left-width: 5px;
+                transform: translate3d(1px, 0px, -40px) rotateY(-90deg);
+                transform-origin: 0%;
+            }
+            .container-body .slide-container .3d-frame-box--right {
+                right: 0;
+                border-right-width: 5px;
+                transform: translate3d(-1px, 0px, -40px) rotateY(90deg);
+                transform-origin: 100%;
+            }
+            .prev-container, .next-container {
+                position: absolute;
+                bottom: -15%;
+                transition: transform 0.25s ease;
+            }
+            .prev-container i, .next-container {
+                font-size: 60px;
+                color: var(--box-border);
+                cursor: pointer;
+            }
+            .prev-container:hover, .next-container:hover {
+                transform: scale(1.25);
+            }
+            .prev-container {
+                left: 40%;
+            }
+            .next-container {
+                right: 40%;
+            }
+            .dots-container {
+                
+            }
+            .dot-container {
+                
+            }
+            .dot-container.active {
+                
+            }
+            .dot-container:hover {
+                
             }
             .box {
+                border-radius: 0px;
                 border: 2px solid white;
-                border-radius: 20px;
-                padding: 5px;
+                padding: 15px;
                 margin: 10px 0;
+                position: relative;
                 display: block;
-                backdrop-filter: blur(2px);
+                backdrop-filter: blur(7px);
             }
             .image {
                 border: none;
                 width: 150px;
                 height: 150px;
                 background-size: cover;
-                border-radius: 10px;
-                background-image: url(https://drive.google.com/file/d/1TKDe8E9-q6KTvCbQyJ2nNBjMLZPsFONt/view?usp=drivesdk.jpg);
-            }
-            img {
-                
-            }
-            h1 {
-                margin: 20px auto;
-                border: none;
-                border-radius: 60%;
-                color: white;
-                background-color: grey;
-                text-align: center;
-                text-shadow: 1px 1px 2px black;
-                width: fit-content;
-                padding: 10px;
+                border-radius: 50%;
+                margin: 20px;
             }
             
+            h1 {
+                position: relative;
+                font-family: 'Caveat', cursive, Sans-Serif;
+                font-size: 3rem;
+                font-weight: bold;
+                color: white;
+                margin: 20px auto;
+                text-align: center;
+                width: fit-content;
+                padding: 0 20px;
+            }
+            h1::before {
+                content: '';
+                position: absolute;
+                left: -15px;
+                right: -15px;
+                top: 50%;
+                height: 0.6em;
+                background: repeating-linear-gradient(
+                -15deg,
+                white 0px,
+                grey 1px,
+                black 2px,
+                grey 3px,
+                white 4px
+                );
+                border-radius: 5px;
+                transform: translateY(-50%) rotate(-1deg);
+                z-index: -100;
+                opacity: 0.9;
+            }
             p {
                 color: white;
             }
@@ -57,42 +190,280 @@
             a:hover {
                 color: orange ;
             }
+            .carousel {
+                display: flex;
+                transition: transform 0.5s ease-in-out;
+            }
+            .slide {
+                min-width: 100%;
+                display: none;
+                position: relative;
+            }
+            .slide.active {
+                display: block;
+            }
+            .prev, .next {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                font-size: 18px;
+                border-radius: 50%;
+                z-index: 5;
+            }
+            .prev {
+                left: 0.5px;
+            }
+            .next {
+                right: 20px;
+            }
+            .prev:hover, .next:hover {
+                background: rgba(0,0,0,0.8);
+            }
+            .dots {
+                text-align: center;
+                padding: 10px;
+            }
+            .dot {
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                margin: 0 5px;
+                background: #bbb;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+            .dot.active {
+                background: orange;
+            }
+            .dot:hover {
+                background: #717171;
+            }
+            .social-icons {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+            }
+            .social-icons i {
+                color: white;
+                font-size: 24px;
+            }
+            .box-scroll {
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: orange white;
+                border: 2px solid white;
+                padding: 15px;
+                border-radius: 0px;
+            }
+            .box-scroll::-webkit-scrollbar {
+                width: 5px;
+            }
+            .box-scroll::-webkit-scrollbar-track {
+                background: rgba(255 255 255 0.1);
+            }
+            .box-scroll::-webkit-scrollbar-thumb {
+                background: orange;
+            }
+            .box-scroll::-webkit-scrollbar-thumb:hover {
+                background: #ff7f00;
+            }
+            .container-scroll {
+                max-height: 50vh;
+                overflow-y: auto;
+                scrollbar-width: thin;
+                scrollbar-color: orange white;
+            }
+            .container-scroll::-webkit-scrollbar {
+                width: 8px;
+            }
+            .container-scroll::-webkit-scrollbar-track {
+                background: rgba(255 255 255 0.1);
+            }
+            .container-scroll::-webkit-scrollbar-thumb {
+                background: orange;
+            }
+            .container-scroll::-webkit-scrollbar-thumb:hover {
+                background: #ff7f00;
+            }
         </style>
     </head>
     <body>
         <div class="container">
+            <div class="container-body">
+                <div class="prev-container"><i class="far fa-angle-left"></i></div>
+                <div class="next-container"><i class="far fa-angle-right"></i></div>
+                <div class="slider-container">
+            <div class="slide-container">
+                <div class="3d-frame">
+                    <div class="3d-frame-box 3d-frame-box--front">
         <h1>Me</h1>
 <div class="box">
-    <p>Name: Sultana Jahan Tahmina</p>
-    <p>Status: Full Stack Web Developer</p>
-    <p>LinkedIn: <a href="https://bd.linkedin.com/in/sultana-jahan-tahmina-621aa2243">Sultana's LinkedIn Profile</a></p>
-    <p>Email: <a href="mailto:sultanajahantahmina19@gmail.com">Email Sultana</a></p>
-    <p>Phone Number: <a href="tel:+880 198 6799 171">Contact Sultana</a></p>
-    <div class="image">
-        <img src="https://drive.google.com/file/d/1TKDe8E9-q6KTvCbQyJ2nNBjMLZPsFONt/view?usp=drivesdk.jpg">
-</div>
-</div>
+    <div class="image"><img src="" alt="Passionate Coder, Sultana"></div>
+    <p>Sultana Jahan Tahmina</p>
+    <p>| Full-Stack Web Developer |</p>
+    <div class="social-icons">
+    <a href="https://www.facebook.com/share/1Dj7rokzU5/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://bd.linkedin.com/in/sultana-jahan-tahmina-621aa2243" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="mailto:sultanajahantahmina19@gmail.com"><i class="fa-regular fa-envelope"></i></a>
+    <a href="https://github.com/SULTANA2219" target="_blank"><i class="fa-brands fa-github"></i></a>
+    <a href="https://www.instagram.com/su_ltana3398?igsh=MXh4MHpyYm5rbzd6bg==" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+    <a href="https://wa.me/+8801986799171" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    </div>
+    </div>
+    <div class="3d-frame-box 3d-frame-box--left"></div>
+    <div class="3d-frame-box 3d-frame-box--right"></div>
+    </div>
+    </div>
+    <div class="slide-container">
+        <div class="3d-frame">
+            <div class="3d-frame-box 3d-frame-box--front">
+    <h1>Skills</h1>
+    <div class="box">
+    <p>HTML, CSS, Tailwand CSS, Bootstrap, JS, node.js, react.js, c, c++, Java, MySQL, pHp, Python, Ruby, GitHub, XAMPP, VS studio, OnlineGDB.</p>
+    </div>
+    <div class="3d-frame-box 3d-frame-box--left"></div>
+    <div class="3d-frame-box 3d-frame-box--right"></div>
+    </div>
+    </div>
+    </div>
+    <div class="slide-container">
+        <div class="3d-frame">
+            <div class="3d-frame-box 3d-frame-box--front">
     <h1>Project</h1>
 <div class="box">
+    <div class="carousel">
+        <div class="slide active">
     <a href><ul><li> E-Commerce website</li></ul></a>
     <p></p>
+    </div>
+    <div class="slide">
     <a href><ul><li> Landing Page</li></ul></a>
     <p></p>
+    </div>
+    <div class="slide">
     <a href><ul><li> IIUC Website (University Project)</li></ul></a>
     <p></p>
+    </div>
+    <div class="slide">
     <a href><ul><li> Social Media Dashboard</li></ul></a>
     <p></p>
+    </div>
+    <div class="slide">
     <a href><ul><li> Sultana's Brand</li></ul></a>
     <p></p>
+    </div>
+    </div>
+    <button class="prev" aria-label="Previous slide">&#10094;</button>
+    <button class="next" aria-label="Next slide">&#10095;</button>
+    <div class="dots">
+        <span class="dot active" data-slide="0"></span>
+        <span class="dot" data-slide="1"></span>
+        <span class="dot" data-slide="2"></span>
+        <span class="dot" data-slide="3"></span>
+        <span class="dot" data-slide="4"></span>
+    </div>
 </div>
+<div class="3d-frame-box 3d-frame-box--left"></div>
+<div class="3d-frame-box 3d-frame-box--right"></div>
+</div>
+</div>
+</div>
+<div class="slide-container">
+    <div class="3d-frame">
+        <div class="3d-frame-box 3d-frame-box--front">
     <h1>My Story</h1>
-<div class="box">
-    <img src="https://ibb.co.com/Wpzwf98m.jpg" alt="Passionate Coder">
+<div class="box-scroll">
+    <div class="container-scroll">
+    <div class="image" style="float: right;"><img src="" alt="Passionate Coder, Sultana"></div>
     <p>One day, her father bought a PC for her elder sister as study material. Since childhood, Sultana had been familiar with computer games and other IT experiences. She gradually developed IT skills and was admitted to a Bachelor’s program in CCE (Computer and Communication Engineering) in 2024. Thus, it became her second heart partner ❤️.</p>
 
 <p>Sultana also explored other fields, but IT is something special to her ❤️‍🔥. She envisions herself five years from now — coding, creating websites, hacking ethically(Cybersecurity), and fighting against bad energies at 3 a.m. in a smart, automated, luxurious home surrounded by marine nature. And those automated components will be made by her. 🖥️🔥
 </p>
 </div>
 </div>
+</div>
+<div class="3d-frame-box 3d-frame-box--left"></div>
+<div class="3d-frame-box 3d-frame-box--right"></div>
+</div>
+</div>
+<div class="dots-container">
+    <span class="dot-container active" data-slide="0"></span>
+    <span class="dot-container" data-slide="1"></span>
+    <span class="dot-container" data-slide="2"></span>
+    <span class="dot-container" data-slide="3"></span>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let currentIndex = 0;
+        
+        function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i===index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i=== index);
+        });
+    }
+    
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+    }
+    
+    function nextSlide() {
+        currentIndex = (currentIndex + 1 ) % slides.length;
+        showSlide(currentIndex);
+    }
+    
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentIndex = index;
+            showSlide(currentIndex);
+        });
+    });
+    
+    setInterval(nextSlide, 3000);
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key ==='ArrowLeft') prevSlide();
+        if (e.key ==='ArrowRight') nextSlide();
+    });
+   });
+   (function()
+   "use strict";
+   
+   var carouselContainer = document.getElementsByClassName('container')[0],
+       sliderContainer = carouselContainer.getElementsByClassName('slider-container')[0],
+       slideContainer = carouselContainer.getElementsByClassName('slide-container')[0],
+       prevContainer = carouselContainer.getElementsByClassName('prev-container')[0],
+       nextContainer = carouselContainer.getElementsByClassName('next-container')[0];
+       
+   var width, height, totalWidth, margin = 20,
+       currIndex = 0,
+       interval, intervalTime = 4000;
+       
+   function init() {
+       resize();
+       move(Math)
+   }
+   )
+</script>
 </body>
 </html>
