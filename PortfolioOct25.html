@@ -15,9 +15,12 @@ margin: 20px;
 color: white;
 }
 .center-container {
-border: 2px solid white;
-width: 1300px;
+/*border: 2px solid white;*/
+width: 100%;
 height: 1000px;
+padding-left: 24px;
+justify-content: center;
+margin-left: 275px;
 }
 .container{
 width: 100%;
@@ -26,17 +29,21 @@ display: flex;
 }
 .container .slide-container {
 margin: 4px;
+display: none;
+/*position: relative;*/
 }
 .container .slide-container.active {
+    display: block;
 }
 .container .slide-container.hidden {
 
 }
 .dots-container {
 text-align: center;
-border: 2px solid white;
+/*border: 2px solid white;*/
 height: 20px;
 padding: 10px;
+margin-left: -19px;
 }
 .dot-container {
 text-align: center;
@@ -60,7 +67,7 @@ background: orange;
 background-color: transparent;
 border: none;
 position: absolute;
-top: 300px;
+top: 275px;
 }
 .prev-container i, .next-container i {
 font-size: 40px;
@@ -73,9 +80,9 @@ transform: scale(1.25);
 left: 20px;
 }
 .next-container {
-right: 5px;
+right: -25px;
 }
-.container .slide-container .slide-container--left, .container .slide-container .slide-container--right {
+/*.container .slide-container .slide-container--left, .container .slide-container .slide-container--right {
 top: 0;
 backface-visibility: hidden;
 }
@@ -90,7 +97,7 @@ right: 0;
 border-right-width: 5px;
 transform: translate3d(-1px, 0px, -40px) rotateY(90deg);
 transform-origin: 100%;
-}
+}*/
 .box {
 width: 250px;
 border-radius: 0px;
@@ -224,6 +231,7 @@ border-radius: 0px;
 display: fixed;
 height: 100px;
 width: 250px;
+backdrop-filter: blur(7px);
 }
 .box-scroll::-webkit-scrollbar {
 width: 5px;
@@ -267,7 +275,7 @@ background: #ff7f00;
 <div class="slide-container active">
 <h1>Me</h1>
 <div class="box">
-<div class="image"><img src="IMG-20251104-WA0065.jpg" alt="Passionate Coder, Sultana"></div>
+<div class="image"><img src="IMG_20250207_204106027.jpg" alt="Passionate Coder, Sultana"></div>
 <p>Sultana Jahan Tahmina</p>
 <p>| Full-Stack Web Developer |</p>
 <div class="social-icons">
@@ -280,16 +288,16 @@ background: #ff7f00;
 </div>
 </div>
 </div>
-<div class="slide-container slide-container--left"></div>
-<div class="slide-container slide-container--right"></div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
 <div class="slide-container">
 <h1>Skills</h1>
 <div class="box">
 <p>HTML, CSS, Tailwand CSS, Bootstrap, JS, node.js, react.js, c, c++, Java, MySQL, pHp, Python, Ruby, GitHub, XAMPP, VS studio, OnlineGDB.</p>
 </div>
 </div>
-<div class="slide-container slide-container--left"></div>
-<div class="slide-container slide-container--right"></div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
 <div class="slide-container">
 <h1>Project</h1>
 <div class="box">
@@ -326,13 +334,13 @@ background: #ff7f00;
 </div>
 </div>
 </div>
-<div class="slide-container slide-container--left"></div>
-<div class="slide-container slide-container--right"></div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
 <div class="slide-container hidden">
 <h1>My Story</h1>
 <div class="box-scroll">
 <div class="container-scroll">
-<div class="image" style="float: right;"><img src="IMG-20251104-WA0065.jpg" alt="Passionate Coder, Sultana"></div>
+<div class="image" style="float: right;"><img src="IMG_20250207_204106027.jpg" alt="Passionate Coder, Sultana"></div>
 <p>One day, her father bought a PC for her elder sister as study material. Since childhood, Sultana had been familiar with computer games and other IT experiences. She gradually developed IT skills and was admitted to a Bachelor’s program in CCE (Computer and Communication Engineering) in 2024. Thus, it became her second heart partner ❤️.</p>
 
 <p>Sultana also explored other fields, but IT is something special to her ❤️‍🔥. She envisions herself five years from now — coding, creating websites, hacking ethically(Cybersecurity), and fighting against bad energies at 3 a.m. in a smart, automated, luxurious home surrounded by marine nature. And those automated components will be made by her. 🖥️🔥
@@ -340,8 +348,8 @@ background: #ff7f00;
 </div>
 </div>
 </div>
-<div class="slide-container slide-container--left"></div>
-<div class="slide-container slide-container--right"></div>
+<!--<div class="slide-container slide-container--left"></div>
+<div class="slide-container slide-container--right"></div>-->
 </div>
 <button class="prev-container" aria-label="Previous Slide"><i class="fa-solid fa-caret-left"></i></button>
 <button class="next-container" aria-label="Next Slide"><i class="fa-solid fa-caret-right"></i></button>
@@ -358,7 +366,12 @@ const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');
+const slidesContainer = document.querySelectorAll('.slide-container');
+const dotsContainer = document.querySelectorAll('.dot-container');
+const prevContainer = document.querySelector('.prev-container');
+const nextContainer = document.querySelector('.next-container');
 let currentIndex = 0;
+let currIndex = 0;
 
 function showSlide(index) {
 slides.forEach((slide, i) => {
@@ -379,8 +392,29 @@ currentIndex = (currentIndex + 1 ) % slides.length;
 showSlide(currentIndex);
 }
 
+function showSlideContainer(index) {
+    slidesContainer.forEach((slideCo, i) => {
+        slideCo.classList.toggle('active', i === index);
+    });
+    dotsContainer.forEach((dotCo, i) => {
+        dotCo.classList.toggle('active', i === index);
+    });
+}
+
+function prevSlideContainer() {
+    currIndex = (currIndex - 1 + slidesContainer.length) % slidesContainer.length;
+    showSlideContainer(currIndex);
+}
+
+function nextSlideContainer() {
+    currIndex = (currIndex + 1) % slidesContainer.length;
+    showSlideContainer(currIndex);
+}
+
 nextBtn.addEventListener('click', nextSlide);
 prevBtn.addEventListener('click', prevSlide);
+nextContainer.addEventListener('click', nextSlideContainer);
+prevContainer.addEventListener('click', prevSlideContainer);
 
 dots.forEach((dot, index) => {
 dot.addEventListener('click', () => {
@@ -389,13 +423,33 @@ showSlide(currentIndex);
 });
 });
 
+dotsContainer.forEach((dotco, index) => {
+    dotco.addEventListener('click', () => {
+        currIndex = index;
+        showSlideContainer(currIndex);
+    });
+});
+
 setInterval(nextSlide, 3000);
+//setInterval(nextSlideContainer, 1000);
 
 document.addEventListener('keydown', (e) => {
 if (e.key ==='ArrowLeft') prevSlide();
 if (e.key ==='ArrowRight') nextSlide();
 });
+
+document.addEventListener('keydown', (f) => {
+    if (f.key === 'ArrowLeft') {
+        f.preventDefault();
+        prevSlideContainer();
+    }
+    if (f.key === 'ArrowRight') {
+        f.preventDefault();
+        nextSlideContainer();
+    }
 });
+});
+
 
 </script>
 </body>
